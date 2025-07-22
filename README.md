@@ -81,13 +81,16 @@ BAM files are binary and compressed.
 
 ---
 
-## 📚 Step 7: Sort the BAM File
+## 📚 Step 7: Sort and index the BAM File
 
 ```bash
 samtools sort -o /home/data/SRR2584866.aligned.sorted.bam /home/data/SRR2584866.aligned.bam
 ```
 
-Sorting improves processing speed for the next steps.
+```bash
+ samtools index SRR2584866.aligned.sorted.bam
+```
+Sorting and indexing improve processing speed for the next steps.
 
 ---
 
