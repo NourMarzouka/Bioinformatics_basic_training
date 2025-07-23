@@ -51,7 +51,7 @@ This dataset contains paired-end FASTQ files.
 ## 🧬 Step 4: Index the Reference Genome
 
 ```bash
-bwa index /home/data/ref_genome/ecoli_rel606.fasta
+bwa index ecoli_rel606.fasta
 ```
 
 Indexing prepares the reference for alignment.
@@ -61,10 +61,10 @@ Indexing prepares the reference for alignment.
 ## 🧾 Step 5: Align Reads with BWA
 
 ```bash
-bwa mem /home/data/ref_genome/ecoli_rel606.fasta \
-data/trimmed_fastq_small/SRR2584866_1.trim.sub.fastq \
-data/trimmed_fastq_small/SRR2584866_2.trim.sub.fastq \
-> /home/data/SRR2584866.aligned.sam
+bwa mem ecoli_rel606.fasta \
+SRR2584866_1.trim.sub.fastq \
+SRR2584866_2.trim.sub.fastq \
+> SRR2584866.aligned.sam
 ```
 
 Output: `SRR2584866.aligned.sam`
@@ -74,7 +74,7 @@ Output: `SRR2584866.aligned.sam`
 ## 🔄 Step 6: Convert SAM to BAM
 
 ```bash
-samtools view -S -b /home/data/SRR2584866.aligned.sam > /home/data/SRR2584866.aligned.bam
+samtools view -S -b SRR2584866.aligned.sam > SRR2584866.aligned.bam
 ```
 
 BAM files are binary and compressed.
@@ -84,7 +84,7 @@ BAM files are binary and compressed.
 ## 📚 Step 7: Sort and index the BAM File
 
 ```bash
-samtools sort -o /home/data/SRR2584866.aligned.sorted.bam /home/data/SRR2584866.aligned.bam
+samtools sort -o SRR2584866.aligned.sorted.bam SRR2584866.aligned.bam
 ```
 
 ```bash
@@ -97,7 +97,7 @@ Sorting and indexing improve processing speed for the next steps.
 ## 📊 Step 8: Check BAM File Stats
 
 ```bash
-samtools flagstat /home/data/SRR2584866.aligned.sorted.bam
+samtools flagstat SRR2584866.aligned.sorted.bam
 ```
 
 This gives summary metrics such as total reads and mapping rates.
@@ -107,9 +107,9 @@ This gives summary metrics such as total reads and mapping rates.
 ## 🔍 Step 9: Generate Raw BCF File
 
 ```bash
-bcftools mpileup -O b -o /home/data/SRR2584866_raw.bcf \
--f /home/data/ref_genome/ecoli_rel606.fasta \
-/home/data/SRR2584866.aligned.sorted.bam
+bcftools mpileup -O b -o SRR2584866_raw.bcf \
+-f ecoli_rel606.fasta \
+SRR2584866.aligned.sorted.bam
 ```
 
 ---
@@ -117,7 +117,7 @@ bcftools mpileup -O b -o /home/data/SRR2584866_raw.bcf \
 ## 🧬 Step 10: Call Variants
 
 ```bash
-bcftools call --ploidy 1 -m -v -o /home/data/SRR2584866_variants.vcf /home/data/SRR2584866_raw.bcf
+bcftools call --ploidy 1 -m -v -o SRR2584866_variants.vcf SRR2584866_raw.bcf
 ```
 
 - `--ploidy 1`: Because bacteria are haploid.
@@ -128,7 +128,7 @@ bcftools call --ploidy 1 -m -v -o /home/data/SRR2584866_variants.vcf /home/data/
 ## 👁️ Step 11: View Variants
 
 ```bash
-less -S /home/data/SRR2584866_variants.vcf
+less -S SRR2584866_variants.vcf
 ```
 
 Use arrow keys to scroll horizontally if needed.
