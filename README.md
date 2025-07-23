@@ -28,10 +28,10 @@ Tools installed:
 ```bash
 mkdir -p /home/data/ref_genome
 
-curl -L -o /home/data/ref_genome/ecoli_rel606.fasta.gz \
+curl -L -o ecoli_rel606.fasta.gz \
 ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/000/017/985/GCA_000017985.1_ASM1798v1/GCA_000017985.1_ASM1798v1_genomic.fna.gz
 
-gunzip /home/data/ref_genome/ecoli_rel606.fasta.gz
+gunzip ecoli_rel606.fasta.gz
 ```
 
 ---
@@ -41,7 +41,7 @@ gunzip /home/data/ref_genome/ecoli_rel606.fasta.gz
 ```bash
 curl -L -o sub.tar.gz https://ndownloader.figshare.com/files/14418248
 tar xvf sub.tar.gz
-mv sub/ /home/data/trimmed_fastq_small
+mv sub/ ~/
 ```
 
 This dataset contains paired-end FASTQ files.
